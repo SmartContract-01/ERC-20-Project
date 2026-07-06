@@ -49,14 +49,16 @@ contract ERC{
         require(balanceof[address(this)]>=tokens,"Insufficient token");
 
         balanceof[address(this)]-=tokens;
-        balanceof[msg.sender]+=tokens;
+        balanceof[msg.sender]+=tokens;  
     }
-    function sellToken() public payable {
-        uint tokens=rate*msg.value;
+    function sellToken(uint tokenAmount) public payable {
+        require(balanceof[msg.sender]>=tokenAmount,"Not enough tokens");
+        uint tokens=tokenAmount/rate;
+        require(address(this).balance>=tokens,"Not enough ether in contract");
 
-        require(balanceof[msg.sender]>=tokens);
-
-        balanceof[msg.sender]-=tokens;
-        balanceof[address(this)]+=tokens;
+        balanceof[msg.sender]-=tokenAmount;
+        balanceof[address(this)]+=tokenAmount;
+        (bool sell,)=payable(msg.sender).call{value:tokens}("");
+        require(sell,"Transfer failed");
     }
 }
