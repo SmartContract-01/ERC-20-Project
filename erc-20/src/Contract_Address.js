@@ -1,4 +1,4 @@
-export const CONTRACT_ADDRESS="0x4c6d9DEd03A0C57B24988434e6ba8bbd8c5d3f92";
+export const CONTRACT_ADDRESS="0x298a038971b99CBd6B22DBc153B40531439e4D7b";
 export const CONTRACT_ABI=[
     {
       "inputs": [
@@ -180,7 +180,13 @@ export const CONTRACT_ABI=[
       "type": "function"
     },
     {
-      "inputs": [],
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "tokenAmount",
+          "type": "uint256"
+        }
+      ],
       "name": "sellToken",
       "outputs": [],
       "stateMutability": "payable",
@@ -270,4 +276,4 @@ export const CONTRACT_ABI=[
       "stateMutability": "payable",
       "type": "receive"
     }
-  ];
+  ]

@@ -1,6 +1,6 @@
 import { useState } from "react";
 const { ethers } = require("ethers");
-function Buy({ Contract}) {
+function Buy({ Contract }) {
   const [ethAmount,setAmount] = useState("");
   const [Rate,setRate]=useState("");
   const BuyTokens_Process = async (e) => {
@@ -17,9 +17,11 @@ function Buy({ Contract}) {
       const Multiply=await Rate_Store*ethAmount;
       console.log("Rate :",Multiply);
       setRate(Multiply);
-      const Buy_Tokens = await Contract.buyTokens({value : ethers.parseEther(ethAmount)});
+      const Buy_Tokens = await Contract.buyTokens({value : ethers.parseUnits(ethAmount,18)});
       await Buy_Tokens.wait();
       console.log("Buy Token :", Buy_Tokens);
+      setAmount("");
+      setRate("");
     } catch (err) {
       window.alert("transaction failed");
       console.error(err);
