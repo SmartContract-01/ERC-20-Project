@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 contract ERC{   
-    string public tokenName="BitcoinToken";
-    string public symbol="BTCT";
+    string public tokenName="LeoX";
+    string public symbol="LX";
     uint public decimal=18;
     uint public rate=1000;
     uint256 immutable public totalsupply;

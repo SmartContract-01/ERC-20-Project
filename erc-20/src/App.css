@@ -4,8 +4,25 @@
 }
 .App {
   text-align: center;
-  background-color: black;
+  /* background-color: black; */
   height: 100vh;
-  color: white;
+  /* color: white; */
 }
-
+.Token{
+    position: flex;
+    padding: 20px;
+    left: 50px;   
+}
+.Symbol{
+    position: flex;
+    left: 20%;
+    padding: 20px;
+  }
+img{
+  position: relative;
+  margin-top: 10px;
+  width: 60px;
+  height: 60px;
+  right: 45%;
+  border-radius: 50px;
+}

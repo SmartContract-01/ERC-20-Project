@@ -13,12 +13,12 @@ function Sell({ Contract }) {
         const s2=Number(s1);
         const s3=await Sell_Token / s2;
         console.log("S2 Token :",s3);
-        setRating(s3);
-
-      const sell = await Contract.sellToken(ethers.parseEther(Sell_Token));
-      await sell.wait();
-      
-      console.log("Sell Token :", sell);
+        
+        const sell = await Contract.sellToken(ethers.parseEther(Sell_Token));
+        await sell.wait();
+        console.log("Sell Token :", sell);
+        
+      setRating(s3);
       setSell_Token("");
       setRating("");
     } catch (err) {
