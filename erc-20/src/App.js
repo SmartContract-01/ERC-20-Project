@@ -5,6 +5,7 @@ import SellToken from "./Component/SellToken.js";
 import Transfer from "./Component/Transfer.js";
 import image from "./images.jpg";
 import { useState, useEffect } from "react";
+// import WalletConnectProvider from "@walletconnect/web3-provider";
 const { ethers } = require("ethers");
 
 function App() {
@@ -99,12 +100,11 @@ function App() {
   // ✅ 4. CONNECT BUTTON
   const connect2 = async () => {
     try {
-      if (!window.ethereum) {
-        alert("Please install MetaMask");
+      if(!window.ethereum){
+        alert("Please install meta mask");
         return;
       }
-
-      const provider = new ethers.BrowserProvider(window.ethereum);
+      const provider = new ethers.BrowserProvider(window.ethereumj);
       await provider.send("eth_requestAccounts", []);
 
       const signer = await provider.getSigner();
@@ -127,10 +127,11 @@ function App() {
 
   return (
     <div className="App">
-        <img src={image}/>
-        <h5 className="Token">Token Name : {Contract_Token}</h5>
-        <h5 className="Symbol">Token Symbol : {Token_Symbol}</h5>
-    
+      <h2>Lo</h2>
+      <img src={image} />
+      <h5 className="Token">Token Name : {Contract_Token}</h5>
+      <h5 className="Symbol">Token Symbol : {Token_Symbol}</h5>
+
       <button onClick={connect2}>Connect</button>
 
       {/* 🔥 current account show */}
