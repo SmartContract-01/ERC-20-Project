@@ -1,8 +1,8 @@
+import "./Transfer.css";
 import { useState } from "react";
 const { ethers } = require("ethers");
 function Transfer({ Contract, Json }) {
   const [Input, setInput] = useState("");
-  const [Check, setBalance] = useState("");
   const [Input_Token, SetToken] = useState("");
   const Call_Transfer = async () => {
     try {
@@ -16,17 +16,10 @@ function Transfer({ Contract, Json }) {
       console.error(err);
     }
   };
-  const BalanceOf = async () => {
-    console.log("Contract :", Json);
-    const Token = await Json.balanceof(Check);
-
-    console.log("Balance of Buyer :", ethers.formatEther(Token));
-    setBalance("");
-  };
   return (
-    <div className="transfer_css"> 
-      <button onClick={Call_Transfer}>Transfer</button>
+    <div className="transfer_css">
       <input
+        className="input_class3"
         text="text"
         placeholder="Enter Address"
         value={Input}
@@ -35,6 +28,7 @@ function Transfer({ Contract, Json }) {
         }}
       />
       <input
+        className="input_class4"
         text="text"
         placeholder="Enter Token"
         value={Input_Token}
@@ -42,15 +36,9 @@ function Transfer({ Contract, Json }) {
           SetToken(e.target.value);
         }}
       />
-      <br />
-      <br />
-      <button onClick={BalanceOf}>CheckBalance</button>
-      <input
-        text="text"
-        placeholder="Enter Address"
-        value={Check}
-        onChange={(e) => setBalance(e.target.value)}
-      />
+      <button className="button_class2" onClick={Call_Transfer}>
+        Transfer
+      </button>
     </div>
   );
 }

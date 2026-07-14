@@ -1,28 +1,104 @@
-*{
+* {
   margin: 0px;
   padding: 0px;
 }
 .App {
-  text-align: center;
-  /* background-color: black; */
-  height: 100vh;
-  /* color: white; */
+  min-height: 100vh;
+  margin: 0px;
+  background-color: rgb(16, 37, 110);
 }
-.Token{
-    position: flex;
-    padding: 20px;
-    left: 50px;   
+.first_box {
+  display: flex;
+  padding: 20px;
+  background-color: rgb(242, 245, 244);
+  background-color: rgb(49, 67, 181);
+  /* background-color: rgb(0, 0, 184); */
+  box-shadow: 2px 2px 2px rgb(255, 255, 255);
 }
-.Symbol{
-    position: flex;
-    left: 20%;
-    padding: 20px;
-  }
-img{
-  position: relative;
-  margin-top: 10px;
+.first_box h2 {
+  color: white;
+  font-size: 30px;
+  margin-left: 1%;
+  text-shadow: 4px 3px 3px black;
+}
+.first_box button {
+  font-weight: bold;
+  font-size: 15px;
+  margin-left: auto;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgb(124, 124, 255);
+  border: 0px;
+  box-shadow: 1px 2px 2px;
+}
+.first_box button:hover {
+  cursor: pointer;
+  color: white;
+  border-radius: 20px;
+}
+.font {
+  color: white;
+  font-size: 25px;
+  margin-left: 40%;
+  margin-top: 8px;
+}
+.second_box {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 0px solid white;
+  box-shadow: 2px 2px 0px 0px white;
+}
+.second_box img {
   width: 60px;
   height: 60px;
-  right: 45%;
   border-radius: 50px;
 }
+.token_info {
+  margin-left: 10px;
+  flex: 1;
+}
+.third_box {
+  color: white;
+  border: 2px dotted white;
+  border-radius: 0px 20px 0px 20px;
+  margin-right: 10px;
+  padding-left: 15px;
+  padding-right: 7%;
+  padding-bottom: 4px;
+  background-color: rgba(0, 179, 255, 0.53);
+}
+.third_box h2 {
+  font-size: 20px;
+}
+.t {
+  display: flex;
+}
+.font_2 {
+  margin-top: 6%;
+}
+.third_box p {
+  font-size: 15px;
+}
+
+.Token {
+  font-size: 20px;
+  color: white;
+}
+.Symbol {
+  max-width: 4%;
+  text-align: center;
+  background-color: orange;
+  border-radius: 10px 0px 10px 0px;
+  color: white;
+  font-size: 15px;
+}
+.Structure {
+  display: flex;
+}
+.BuySell {
+  flex: 1;
+}
+/* .Transfer {
+  flex: 1;
+} */

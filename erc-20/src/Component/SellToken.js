@@ -1,8 +1,8 @@
+import "./SellToken.css";
 import { useState } from "react";
 const { ethers } = require("ethers");
 function Sell({ Contract }) {
   const [Sell_Token, setSell_Token] = useState("");
-  const [Rating,setRating] = useState("");
   const SellTokens_Process = async () => {
       if(!Contract){
           console.log("Contract is not ready");
@@ -18,24 +18,22 @@ function Sell({ Contract }) {
         await sell.wait();
         console.log("Sell Token :", sell);
         
-      setRating(s3);
       setSell_Token("");
-      setRating("");
     } catch (err) {
       console.error(err);
     }
   };
  
   return (
-    <div>
-      <h1>{Rating}</h1>
-      <button onClick={SellTokens_Process}>SellTokens</button>
+    <div className="Sell">
       <input
+        className="input_class2"
         text="text"
-        placeholder="Enter Token"
+        placeholder="0"
         value={Sell_Token}
         onChange={(e) => setSell_Token(e.target.value)}
       />
+      <button className="sell_class" onClick={SellTokens_Process}>SellTokens</button>
     </div>
   );
 }

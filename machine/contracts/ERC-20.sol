@@ -14,7 +14,7 @@ contract ERC{
     constructor(uint _intialsupply){
         totalsupply= _intialsupply*(10**decimal);
         balanceof[address(this)]=totalsupply;
-        emit Transfer(address(0), msg.sender, totalsupply);
+        emit Transfer(address(0), address(this), totalsupply);
     }
     function transfer(address to,uint256 amount) public {
         require(balanceof[msg.sender]>=amount,"Insufficient balance for transfer function");
@@ -29,7 +29,7 @@ contract ERC{
 
         emit Approval(msg.sender, spender, amount); 
     }
-    function allownace(address owner,address spender) public view returns(uint){
+    function allowance(address owner,address spender) public view returns(uint){
         return allow[owner][spender];
     }
      function transferFrom(address from,address to,uint256 amount) public {
@@ -40,7 +40,7 @@ contract ERC{
         balanceof[to]+=amount;
         allow[from][msg.sender]-=amount;
 
-        emit Approval(from,to,amount);
+        emit Transfer(from,to,amount);
     }
     receive() external payable { }
     function buyTokens() public payable{
@@ -60,5 +60,8 @@ contract ERC{
         balanceof[address(this)]+=tokenAmount;
         (bool sell,)=payable(msg.sender).call{value:tokens}("");
         require(sell,"Transfer failed");
+    }
+    function Walletbalance(address _address) public view returns(uint){
+        return balanceof[_address];
     }
 }

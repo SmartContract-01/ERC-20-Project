@@ -5,6 +5,8 @@ import SellToken from "./Component/SellToken.js";
 import Transfer from "./Component/Transfer.js";
 import image from "./images.jpg";
 import { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEthereum } from "@fortawesome/free-brands-svg-icons";
 // import WalletConnectProvider from "@walletconnect/web3-provider";
 const { ethers } = require("ethers");
 
@@ -14,7 +16,8 @@ function App() {
   const [Token_Symbol, SetSymbol] = useState("");
   const [Json, SetJson] = useState("");
   const [account, setAccount] = useState("");
-
+  const [Address, SetAddress] = useState("");
+  const [Wallet, SetWallet] = useState(0);
   // ✅ 1. Read-only contract (JsonRpc)
   useEffect(() => {
     const Token = async () => {
@@ -32,11 +35,29 @@ function App() {
       const Symbol = await c1.symbol();
       SetSymbol(Symbol);
     };
-
     Token();
   }, []);
 
-  // ✅ 2. AUTO CONNECT (page load par check karega)
+  useEffect(() => {
+    // this is not give the live balance we need to refresh and then balance is change
+    const WalletBalnce = async () => {
+      try {
+        if (!Address) {
+          console.log("wait ....");
+          return;
+        }
+        const bal = await Contract.balanceof(Address);
+
+        const formate = await ethers.formatEther(bal);
+        console.log("Bal :", formate);
+        SetWallet(formate);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    WalletBalnce();
+  }, [Address, Contract]);
+
   useEffect(() => {
     const checkConnection = async () => {
       if (window.ethereum) {
@@ -45,7 +66,7 @@ function App() {
 
         if (accounts.length > 0) {
           const signer = await provider.getSigner();
-
+          const address = await signer.getAddress();
           const contract = new ethers.Contract(
             CONTRACT_ADDRESS,
             CONTRACT_ABI,
@@ -54,6 +75,7 @@ function App() {
 
           setContract(contract);
           setAccount(accounts[0].address);
+          SetAddress(address);
 
           console.log("Auto Connected:", accounts[0].address);
         }
@@ -63,18 +85,19 @@ function App() {
     checkConnection();
   }, []);
 
-  // ✅ 3. ACCOUNT SWITCH HANDLER (no reload)
   useEffect(() => {
     if (window.ethereum) {
       const handler = async (accounts) => {
         if (accounts.length === 0) {
           setContract(null);
           setAccount("");
+          console.log("Account Disconnect ...");
           return;
         }
 
         const provider = new ethers.BrowserProvider(window.ethereum);
         const signer = await provider.getSigner();
+        const address = await signer.getAddress();
 
         const contract = new ethers.Contract(
           CONTRACT_ADDRESS,
@@ -84,38 +107,36 @@ function App() {
 
         setContract(contract);
         setAccount(accounts[0]);
+        SetAddress(address);
 
         console.log("Switched Account:", accounts[0]);
       };
 
       window.ethereum.on("accountsChanged", handler);
 
-      // cleanup
       return () => {
         window.ethereum.removeListener("accountsChanged", handler);
       };
     }
   }, []);
 
-  // ✅ 4. CONNECT BUTTON
   const connect2 = async () => {
     try {
-      if(!window.ethereum){
+      if (!window.ethereum) {
         alert("Please install meta mask");
         return;
       }
-      const provider = new ethers.BrowserProvider(window.ethereumj);
+      const provider = new ethers.BrowserProvider(window.ethereum);
       await provider.send("eth_requestAccounts", []);
 
       const signer = await provider.getSigner();
       const address = await signer.getAddress();
-
+      SetAddress(address);
       const contract = new ethers.Contract(
         CONTRACT_ADDRESS,
         CONTRACT_ABI,
         signer,
       );
-
       setContract(contract);
       setAccount(address);
 
@@ -127,19 +148,41 @@ function App() {
 
   return (
     <div className="App">
-      <h2>Lo</h2>
-      <img src={image} />
-      <h5 className="Token">Token Name : {Contract_Token}</h5>
-      <h5 className="Symbol">Token Symbol : {Token_Symbol}</h5>
+      <div className="first_box">
+        <FontAwesomeIcon className="font" icon={faEthereum} bounce />
+        <h2>LeoX DApp</h2>
+        <button onClick={connect2} disabled={account}>
+          {account
+            ? `Connected: ${account.slice(0, 6)}...${account.slice(-4)}`
+            : "Connect"}
+        </button>
+      </div>
+      <div className="second_box">
+        <img src={image} />
 
-      <button onClick={connect2}>Connect</button>
+        <div className="token_info">
+          <h5 className="Token">{Contract_Token}</h5>
+          <h5 className="Symbol">{Token_Symbol}</h5>
+        </div>
 
-      {/* 🔥 current account show */}
-      <h3>Connected: {account}</h3>
+        <div className="third_box">
+          <p>Wallet Balance</p>
+          <div className="t">
+            <FontAwesomeIcon className="font_2" icon={faEthereum} />
+            <h2>{Wallet}</h2>
+          </div>
+        </div>
+      </div>
 
-      <BuyTokens Contract={Contract} />
-      <SellToken Contract={Contract} />
-      <Transfer Contract={Contract} Json={Json} />
+      <div className="Structure">
+        <div className="BuySell">
+          <BuyTokens Contract={Contract} Account={account}/>
+          <SellToken Contract={Contract} />
+        </div>
+        <div className="Transfer">
+          <Transfer Contract={Contract} Json={Json} />
+        </div>
+      </div>
     </div>
   );
 }

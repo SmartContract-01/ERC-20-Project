@@ -1,4 +1,4 @@
-export const CONTRACT_ADDRESS="0x298a038971b99CBd6B22DBc153B40531439e4D7b";
+export const CONTRACT_ADDRESS="0x0eA8D9557b6D0Eb81b0AdfB3D73B7f82949F7dc4";
 export const CONTRACT_ABI=[
     {
       "inputs": [
@@ -65,6 +65,25 @@ export const CONTRACT_ABI=[
       "inputs": [
         {
           "internalType": "address",
+          "name": "_address",
+          "type": "address"
+        }
+      ],
+      "name": "Walletbalance",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
           "name": "",
           "type": "address"
         },
@@ -98,7 +117,7 @@ export const CONTRACT_ABI=[
           "type": "address"
         }
       ],
-      "name": "allownace",
+      "name": "allowance",
       "outputs": [
         {
           "internalType": "uint256",
@@ -276,4 +295,4 @@ export const CONTRACT_ABI=[
       "stateMutability": "payable",
       "type": "receive"
     }
-  ]
+  ];

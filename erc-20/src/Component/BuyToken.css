@@ -1,0 +1,25 @@
+.Buy{
+    max-width: 100%;
+    margin-left: 15%;
+    margin-top: 35px;
+}
+.input_class{
+    display: flex;
+    width: 70%;
+    height: 4ch;
+    font-size: 50px;
+    border-radius:20px;
+}
+.button_class{
+    margin-bottom: 6px;
+    width: 71%;
+    height: 7ch;
+    border-radius:20px;
+    background-color: blue;
+    color: white;
+}
+.button_class:hover{
+    background-color: rgb(196, 233, 245);
+    color: black;
+    cursor: pointer;
+}

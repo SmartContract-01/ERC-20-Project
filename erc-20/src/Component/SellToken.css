@@ -1,0 +1,23 @@
+.input_class2{
+    margin-top: 7px;
+    width: 59%;
+    height: 4ch;
+    margin-left:15%;
+    border-radius:20px;
+    display: flex;
+    font-size: 50px;
+}
+.sell_class{
+    margin-left: 15%;
+    width: 59%;
+    height: 7ch;
+    border-radius: 20px;
+    margin-top: 6px;
+    background-color: blue;
+    color: white;
+}
+.sell_class:hover{
+    background-color: rgb(196, 233, 245);
+    color: black;
+    cursor: pointer;
+}
